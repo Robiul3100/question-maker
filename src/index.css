@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Custom Bengali fonts (self-hosted CDN fallback) ---------- */
+@font-face {
+  font-family: 'SolaimanLipi';
+  src: url('https://cdn.jsdelivr.net/gh/maateen/bangla-web-fonts/fonts/SolaimanLipi/SolaimanLipi.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Kalpurush';
+  src: url('https://cdn.jsdelivr.net/gh/maateen/bangla-web-fonts/fonts/Kalpurush/Kalpurush.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* ---------- Base layer ---------- */
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-accent text-ink font-bn antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: contain;
+  }
+
+  /* Allow language-aware typography via [lang] attribute */
+  [lang='en'] {
+    @apply font-en;
+  }
+  [lang='ar'],
+  [lang='ur'] {
+    @apply font-ar;
+    direction: rtl;
+  }
+
+  /* Better tap targets on mobile */
+  button,
+  a {
+    @apply min-h-tap;
+  }
+}
+
+/* ---------- Components ---------- */
+@layer components {
+  .app-shell {
+    @apply mx-auto w-full max-w-app min-h-full bg-white relative;
+  }
+
+  .page-pad {
+    /* leave room for the bottom nav (h-16) */
+    @apply px-4 pt-4 pb-24;
+  }
+}
+
+/* ---------- Utilities ---------- */
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
